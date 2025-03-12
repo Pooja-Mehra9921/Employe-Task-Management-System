@@ -1,45 +1,65 @@
-.main-login-container{
+.fx-direction {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.main-login-container {
     width: 100%;
     height: 100vh;
     background-image: linear-gradient(#3750eb 50%, #c5d4fd 50%);
 }
 
-.paper-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: red;
+.paper-container {
+    background-color: rgb(255, 255, 255);
     width: 1000px;
     height: 600px;
     border-radius: 50px;
+    box-shadow: 0px 0px 10px rgb(190, 190, 190);
 }
 
-.sec{
+.sec {
     width: 50%;
     height: 100%;
 
 }
-.login-left-section{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.login-form{
+.login-form {
     margin: 50px;
 }
 
-.login-right-section{
+.login-right-section {
     background-color: #edf0f5;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
-   
+
 
 }
 
-.login-image{
+
+.right-title{
+    position: relative;
+    animation: titleMove 1s;
+    animation-fill-mode:backwards;
+}
+@keyframes titleMove {
+    from {top: 90px;}
+    to {top: 0px;}
+  }
+.login-image {
     height: 300px;
+    position: relative;
+  animation: imagemove 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes imagemove {
+    from {top: 0px;}
+    to {top: 30px;}
+  }
+
+.login-btn {
+    height: 50px !important;
+    border-radius: 10px !important;
+    margin: 25px auto !important;
 }
