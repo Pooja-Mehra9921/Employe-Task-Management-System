@@ -22,13 +22,16 @@ import EmailIcon from "@mui/icons-material/Email";
 import "./style.css";
 
 const SignUpPage = () => {
+    const userDetail ={
+        email:"",
+        password:"",
+        confirmPassword:""
+      }
   const navigate = useNavigate();
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [userData, setUserData] = useState({});
 
-  const userDetail ={
-    email:"",
-    password:""
-  }
+
 
 
   // handle password visibility
@@ -38,10 +41,24 @@ const SignUpPage = () => {
   };
 
   // get data enter by user in the inputs 
-  const handleInputvalue=(event)=>{
-console.log("input value--", event.target.value);
-console.log("input type---", event.target.type);
+
+  const handleInputvalue=(type)=>(event)=>{
+
+setUserData({...userData, [type]:event.target.value});
   }
+
+console.log("user detail", userData);
+
+/** handle Sign up btn */
+const handleSignupbtn =()=>{
+    if(userData.email == "" || userData.password == "" || userData.confirmPassword == ""){
+    console.log("form submit");
+
+    }
+    return console.log("all filed are required");
+
+};
+
   return (
     <Box className="main-login-container fx-direction">
       <Box className="paper-container fx-direction">
@@ -82,7 +99,7 @@ console.log("input type---", event.target.type);
                   marginBottom: "20px",
                 },
               }}
-              onChange={handleInputvalue}
+              onChange={handleInputvalue("email")}
             />
             <Typography variant="body1" sx={{ color: "grey" }}>
               Password
@@ -112,7 +129,7 @@ console.log("input type---", event.target.type);
                   marginBottom: "20px",
                 },
               }}
-              onChange={handleInputvalue}
+              onChange={handleInputvalue("password")}
 
             />
             <Typography variant="body1" sx={{ color: "grey" }}>
@@ -142,7 +159,7 @@ console.log("input type---", event.target.type);
                   backgroundColor: "#edf0f5",
                 },
               }}
-              onChange={handleInputvalue}
+              onChange={handleInputvalue("ConfirmPassword")}
 
             />
             <Button
@@ -151,6 +168,7 @@ console.log("input type---", event.target.type);
               color="primary"
               fullWidth
               sx={{ mt: 2 }}
+              onClick={handleSignupbtn}
             >
               Sign up
             </Button>
