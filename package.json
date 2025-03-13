@@ -5,7 +5,8 @@
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
     "react": "^19.0.0",
-    "react-router-dom": "^7.3.0"
+    "react-router-dom": "^7.3.0",
+    "react-toastify": "^11.0.5"
   },
   "name": "employe-task-management-system",
   "version": "1.0.0",

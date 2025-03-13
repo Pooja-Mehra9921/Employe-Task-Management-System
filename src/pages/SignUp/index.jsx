@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 // assets
 import LOGIN_IMAGE from "../../assets/images/loginpageimage.png";
 
@@ -20,19 +19,19 @@ import EmailIcon from "@mui/icons-material/Email";
 
 // styles
 import "./style.css";
+import { showErrorToast, showSuccessToast } from "../../components/Notifications";
 
 const SignUpPage = () => {
-    const userDetail ={
-        email:"",
-        password:"",
-        confirmPassword:""
-      }
   const navigate = useNavigate();
   const [isPasswordShow, setIsPasswordShow] = useState(false);
-  const [userData, setUserData] = useState({});
-
-
-
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
 
   // handle password visibility
 
@@ -40,24 +39,39 @@ const SignUpPage = () => {
     setIsPasswordShow(!isPasswordShow);
   };
 
-  // get data enter by user in the inputs 
+  // handle confirm password visibility
 
-  const handleInputvalue=(type)=>(event)=>{
+  const handleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+  };
+  // get data enter by user in the inputs
 
-setUserData({...userData, [type]:event.target.value});
-  }
+  const handleInputvalue = (type) => (event) => {
+    setUserData({ ...userData, [type]: event.target.value });
+  };
 
-console.log("user detail", userData);
-
-/** handle Sign up btn */
-const handleSignupbtn =()=>{
-    if(userData.email == "" || userData.password == "" || userData.confirmPassword == ""){
-    console.log("form submit");
-
+  /** handle Sign up btn */
+  const handleSignupbtn = () => {
+    if (
+      userData.email == "" ||
+      userData.password == "" ||
+      userData.confirmPassword == ""
+    ) {
+      return showErrorToast("all filed are required");
     }
-    return console.log("all filed are required");
 
-};
+    if (userData.password !== userData.confirmPassword) {
+      return console.log("password is not matched");
+    }
+    console.log("form submit", userData);
+    
+    showSuccessToast("sign up succusfully");
+    setUserData({
+      email:"",
+      password:"",
+      confirmPassword:""
+    })
+  };
 
   return (
     <Box className="main-login-container fx-direction">
@@ -81,10 +95,11 @@ const handleSignupbtn =()=>{
             <TextField
               className="textfiled"
               type="email"
+              value={userData.email}
               variant="outlined"
               margin="none"
               fullWidth
-              placeholder="example@gmail.com"
+              placeholder="Example@gmail.com"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -101,6 +116,7 @@ const handleSignupbtn =()=>{
               }}
               onChange={handleInputvalue("email")}
             />
+            {error && <Typography color="red">{error}</Typography>}
             <Typography variant="body1" sx={{ color: "grey" }}>
               Password
             </Typography>
@@ -108,9 +124,11 @@ const handleSignupbtn =()=>{
             <TextField
               variant="outlined"
               type={isPasswordShow ? "text" : "password"}
+              value={userData.password}
+
               margin="none"
               fullWidth
-              placeholder="enter your password"
+              placeholder="Enter your password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -130,7 +148,6 @@ const handleSignupbtn =()=>{
                 },
               }}
               onChange={handleInputvalue("password")}
-
             />
             <Typography variant="body1" sx={{ color: "grey" }}>
               Confirm Password
@@ -138,15 +155,17 @@ const handleSignupbtn =()=>{
 
             <TextField
               variant="outlined"
-              type={isPasswordShow ? "text" : "password"}
+              type={isConfirmPasswordVisible ? "text" : "password"}
+              value={userData.confirmPassword}
+
               margin="none"
               fullWidth
-              placeholder="confirm your password"
+              placeholder="Confirm your password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={handlePasswordVisibility}>
-                      {isPasswordShow ? (
+                    <IconButton onClick={handleConfirmPasswordVisibility}>
+                      {isConfirmPasswordVisible ? (
                         <VisibilityIcon />
                       ) : (
                         <VisibilityOffIcon />
@@ -159,8 +178,7 @@ const handleSignupbtn =()=>{
                   backgroundColor: "#edf0f5",
                 },
               }}
-              onChange={handleInputvalue("ConfirmPassword")}
-
+              onChange={handleInputvalue("confirmPassword")}
             />
             <Button
               className="login-btn"
