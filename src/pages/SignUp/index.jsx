@@ -19,58 +19,80 @@ import EmailIcon from "@mui/icons-material/Email";
 
 // styles
 import "./style.css";
-import { showErrorToast, showSuccessToast } from "../../components/Notifications";
+import { showErrorToast, showSuccessToast } from "../../components/Messages";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [isPasswordShow, setIsPasswordShow] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
 
-  // handle password visibility
+  // Handle password visibility
+  const handlePasswordVisibility = () => setIsPasswordShow(!isPasswordShow);
+  const handleConfirmPasswordVisibility = () => setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
 
-  const handlePasswordVisibility = () => {
-    setIsPasswordShow(!isPasswordShow);
-  };
-
-  // handle confirm password visibility
-
-  const handleConfirmPasswordVisibility = () => {
-    setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
-  };
-  // get data enter by user in the inputs
-
-  const handleInputvalue = (type) => (event) => {
+  // Handle input change
+  const handleInputValue = (type) => (event) => {
     setUserData({ ...userData, [type]: event.target.value });
   };
 
-  /** handle Sign up btn */
-  const handleSignupbtn = () => {
-    if (
-      userData.email == "" ||
-      userData.password == "" ||
-      userData.confirmPassword == ""
-    ) {
-      return showErrorToast("all filed are required");
+  // Reset form fields
+  const resetForm = () => {
+    setUserData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+  };
+
+  // Email validation function
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  /** Handle Signup button */
+  const handleSignupBtn = () => {
+    const { email, password, confirmPassword } = userData;
+
+    if (!email || !password || !confirmPassword) {
+      return showErrorToast("All fields are required");
     }
 
-    if (userData.password !== userData.confirmPassword) {
-      return console.log("password is not matched");
+    if (!isValidEmail(email)) {
+      return showErrorToast("Please enter a valid email address");
     }
-    console.log("form submit", userData);
-    
-    showSuccessToast("sign up succusfully");
-    setUserData({
-      email:"",
-      password:"",
-      confirmPassword:""
-    })
+
+    if (password !== confirmPassword) {
+      return showErrorToast("Passwords do not match");
+    }
+
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem("Users")) || [];
+
+    // Check if the email is already registered
+    const isEmailExist = existingUsers.some((user) => user.email === email);
+    if (isEmailExist) {
+      return showErrorToast("Email is already registered. Please use a different email.");
+    }
+
+    // Append the new user to the existing users array
+    const updatedUsers = [...existingUsers, { email, password }];
+
+    // Save the updated users array to local storage
+    localStorage.setItem("Users", JSON.stringify(updatedUsers));
+
+    showSuccessToast("Sign-up successful");
+    resetForm();
+
+    // Navigate to login after successful signup
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   return (
@@ -78,28 +100,20 @@ const SignUpPage = () => {
       <Box className="paper-container fx-direction">
         <Box className="login-left-section sec fx-direction">
           <Box className="login-form">
-            <Typography
-              sx={{ textAlign: "center", margin: "30px" }}
-              variant="h4"
-              component="h1"
-              gutterBottom
-            >
+            <Typography sx={{ textAlign: "center", margin: "30px" }} variant="h4">
               Sign Up
             </Typography>
-            <Typography
-              variant="body1"
-              sx={{ margin: "5px auto", color: "grey" }}
-            >
-              Username or email
+
+            <Typography variant="body1" sx={{ margin: "5px auto", color: "grey" }}>
+              Username or Email
             </Typography>
             <TextField
               className="textfiled"
               type="email"
               value={userData.email}
               variant="outlined"
-              margin="none"
               fullWidth
-              placeholder="Example@gmail.com"
+              placeholder="example@gmail.com"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -114,30 +128,21 @@ const SignUpPage = () => {
                   marginBottom: "20px",
                 },
               }}
-              onChange={handleInputvalue("email")}
+              onChange={handleInputValue("email")}
             />
-            {error && <Typography color="red">{error}</Typography>}
-            <Typography variant="body1" sx={{ color: "grey" }}>
-              Password
-            </Typography>
 
+            <Typography variant="body1" sx={{ color: "grey" }}>Password</Typography>
             <TextField
               variant="outlined"
               type={isPasswordShow ? "text" : "password"}
               value={userData.password}
-
-              margin="none"
               fullWidth
               placeholder="Enter your password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handlePasswordVisibility}>
-                      {isPasswordShow ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
+                      {isPasswordShow ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -147,29 +152,21 @@ const SignUpPage = () => {
                   marginBottom: "20px",
                 },
               }}
-              onChange={handleInputvalue("password")}
+              onChange={handleInputValue("password")}
             />
-            <Typography variant="body1" sx={{ color: "grey" }}>
-              Confirm Password
-            </Typography>
 
+            <Typography variant="body1" sx={{ color: "grey" }}>Confirm Password</Typography>
             <TextField
               variant="outlined"
               type={isConfirmPasswordVisible ? "text" : "password"}
               value={userData.confirmPassword}
-
-              margin="none"
               fullWidth
               placeholder="Confirm your password"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleConfirmPasswordVisibility}>
-                      {isConfirmPasswordVisible ? (
-                        <VisibilityIcon />
-                      ) : (
-                        <VisibilityOffIcon />
-                      )}
+                      {isConfirmPasswordVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -178,27 +175,23 @@ const SignUpPage = () => {
                   backgroundColor: "#edf0f5",
                 },
               }}
-              onChange={handleInputvalue("confirmPassword")}
+              onChange={handleInputValue("confirmPassword")}
             />
+
             <Button
               className="login-btn"
               variant="contained"
               color="primary"
               fullWidth
               sx={{ mt: 2 }}
-              onClick={handleSignupbtn}
+              onClick={handleSignupBtn}
             >
-              Sign up
+              Sign Up
             </Button>
-            <Typography
-              variant="body1"
-              sx={{ textAlign: "center", margin: "10px" }}
-            >
+
+            <Typography variant="body1" sx={{ textAlign: "center", margin: "10px" }}>
               Already have an account?{" "}
-              <span
-                style={{ cursor: "pointer", color: "blue" }}
-                onClick={() => navigate("/login")}
-              >
+              <span style={{ cursor: "pointer", color: "blue" }} onClick={() => navigate("/login")}>
                 Login
               </span>
             </Typography>
@@ -207,13 +200,9 @@ const SignUpPage = () => {
 
         <Box className="login-right-section sec">
           <Box className="fx-direction">
-            <img className="login-image" src={LOGIN_IMAGE} alt="Login Image" />
+            <img className="login-image" src={LOGIN_IMAGE} alt="Login" />
           </Box>
-          <Typography
-            className="right-title"
-            variant="h5"
-            sx={{ textAlign: "center", marginTop: "20px" }}
-          >
+          <Typography className="right-title" variant="h5" sx={{ textAlign: "center", marginTop: "20px" }}>
             Check Your Project Progress
           </Typography>
         </Box>
