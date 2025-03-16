@@ -1,13 +1,19 @@
 import React from "react";
 // styles
 import "./style.css"
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import HomeCart from "../HomeCart";
 
 const Home = ()=>{
     return(
         <>
-        
-        <Typography variant="h1">this is a home component</Typography>
+        <Box className="homeSection-main-container">
+        <HomeCart/>
+        <HomeCart/>
+        <HomeCart/>
+        <HomeCart/> 
+
+        </Box>
         </>
     )
 };
