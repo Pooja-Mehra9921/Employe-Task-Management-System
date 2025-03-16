@@ -78,7 +78,7 @@ const Dashboard = () => {
       </Drawer>
 
       {/* Main Content Area */}
-      <Box  component="main" sx={{ flexGrow: 1, p: 3, marginLeft: `${drawerWidth}px` }}>
+      <Box className="MuiBox-root css-7xtdhl"  component="main" sx={{ flexGrow: 1, p: 3, marginLeft: `${drawerWidth}px` }}>
         <Toolbar />
         {
          selectedComponent
