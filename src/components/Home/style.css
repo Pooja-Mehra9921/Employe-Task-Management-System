@@ -4,3 +4,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.css-1ygil4i-MuiToolbar-root{
+    margin: 0 !important;
+    min-height:0px !important;
+}

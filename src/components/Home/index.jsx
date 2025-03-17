@@ -7,6 +7,7 @@ import HomeCart from "../HomeCart";
 const Home = ()=>{
     return(
         <>
+        <Box className="css-1ygil4i-MuiToolbar-root"></Box>
         <Box className="homeSection-main-container">
         <HomeCart/>
         <HomeCart/>

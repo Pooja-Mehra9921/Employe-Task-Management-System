@@ -38,13 +38,13 @@ const Dashboard = () => {
 
     const listItems = [
 
-        { title: "Home", icon : <HomeIcon/>, path: <Home/>},
-        { title: "Boards", icon : <DashboardIcon/> , path: <Boards/>},
+        { title: "Dashboard", icon : <HomeIcon/>, path: <Home/>},
+        { title: "Task Board", icon : <DashboardIcon/> , path: <Boards/>},
         { title: "Projects", icon : <WindowIcon/> , path: <Projects/>},
-        { title: "Analytics", icon : <LeaderboardIcon/> , path: <Analytics/>},
-        { title: "WorkFlows", icon : <GroupsIcon/> , path: <WorkFlows/>},
+        { title: "Employees", icon : <LeaderboardIcon/> , path: <Analytics/>},
+        { title: "Reports", icon : <GroupsIcon/> , path: <WorkFlows/>},
         { title: "Notifications", icon : <NotificationsIcon/> , path: <Notifications/>},
-        { title: "Newslatter", icon : <NewspaperIcon/>, path: <Newslatter/>},
+        { title: "Settings", icon : <NewspaperIcon/>, path: <Newslatter/>},
     ]
 
     const [selectedComponent,  setSelectedComponent] = useState(<Home/>);
@@ -60,7 +60,8 @@ const Dashboard = () => {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <Box className="css-1ygil4i-MuiToolbar-root"></Box>
+          <Typography className="dashboard-title" variant="h6" noWrap>
             Dashboard
           </Typography>
         </Toolbar>
