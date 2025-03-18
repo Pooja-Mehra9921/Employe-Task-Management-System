@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./src/pages/Login";
 import SignUpPage from "./src/pages/SignUp";
 import Dashboard from "./src/pages/Dashboard";
+import Header from "./src/components/Header";
 
 
 const App = ()=>{

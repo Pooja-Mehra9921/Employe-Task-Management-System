@@ -9,7 +9,7 @@
 .css-7xtdhl {
     -webkit-box-flex: 1;
     flex-grow: 1;
-    padding: 30px !important;
+    padding: 0 !important;
     margin-left: 0px !important;
 }
 
@@ -26,3 +26,10 @@
     justify-content: center !important;
 }
 
+.main-content-section{
+    margin: 40px;
+}
+
+.MuiDrawer-paper{
+    background-color: #3750eb !important;
+}

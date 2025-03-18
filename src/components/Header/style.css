@@ -1,0 +1,15 @@
+.main-header-container{
+    background-color: #c5d4fd;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:  10px 30px;
+    margin: 15px;
+    border-radius: 10px;
+}
+
+.logout-btn{
+    background-color: #3750eb !important;
+    color: white !important;
+}
