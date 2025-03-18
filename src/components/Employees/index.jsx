@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 // styles
 import "./style.css";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
+import AddEmployee from "../AddEmployeModal";
 
 const Employees = () => {
+  const [openAddEmployee, setOpenAddEmployee] = useState(false);
+
+  const handleAddEmployee = () => {
+    setOpenAddEmployee(true);
+  };
+
   return (
     <>
+      <AddEmployee open={openAddEmployee} setOpen={setOpenAddEmployee} />
       <Box className="emp-sec-main-container">
         <TextField
           variant="outlined"
@@ -44,9 +52,17 @@ const Employees = () => {
         />
 
         <Button
-          variant="obtained"
+          variant="contained"
           className="add-empl-btn"
           startIcon={<AddIcon />}
+          onClick={handleAddEmployee}
+          sx={{
+            backgroundColor: "#90CAF9",
+            color: "#000",
+            "&:hover": {
+              backgroundColor: "#64B5F6",
+            },
+          }}
         >
           Add New Employee
         </Button>

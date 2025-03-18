@@ -4,13 +4,14 @@ import React from "react";
 import "./style.css"
 import { Box, Typography } from "@mui/material";
 
-const HomeCart =()=>{
+const HomeCart =({title, bgColor})=>{
     return(
         <>
-        <Box className="main-homecart-container">
+        <Box sx={{margin:"10px", backgroundColor: bgColor}} className="main-homecart-container">
             <Box>
-            <Typography sx={{textAlign:"center"}}>Total Employess</Typography>
             <Typography sx={{textAlign:"center"}}>0</Typography>
+            <Typography sx={{textAlign:"center"}}>{title}</Typography>
+
             </Box>
 
         </Box>
