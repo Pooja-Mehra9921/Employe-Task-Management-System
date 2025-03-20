@@ -31,12 +31,15 @@ import TaskBoard from "../../components/TaskBoard";
 import EmployeesDetail from "../../components/EmployeesDetail";
 import Reports from "../../components/Reports";
 import Settings from "../../components/Settings";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 200; // Set the sidebar width
 
 const Home = () => {
+
+  const navigate = useNavigate();
   const listItems = [
-    { title: "Dashboard", icon: <HomeIcon />, component: <DashBoard /> },
+    { title: "Dashboard", icon: <HomeIcon />, component: <DashBoard/>  },
     { title: "Task Board", icon: <DashboardIcon />, component: <TaskBoard /> },
     { title: "Projects", icon: <WindowIcon />, component: <Projects /> },
     { title: "Employees", icon: <LeaderboardIcon />, component: <EmployeesDetail /> },
