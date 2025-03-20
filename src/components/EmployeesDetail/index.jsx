@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployee from "../AddEmployeModal";
 
-const Employees = () => {
+const EmployeesDetail = () => {
   const [openAddEmployee, setOpenAddEmployee] = useState(false);
 
   const handleAddEmployee = () => {
@@ -71,4 +71,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default EmployeesDetail;

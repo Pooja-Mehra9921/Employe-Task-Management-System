@@ -68,9 +68,9 @@ const LoginPage = () => {
       // Store logged-in user data in localStorage
       localStorage.setItem("LoggedInUser", JSON.stringify(foundUser));
 
-      // Redirect to dashboard
+      // Redirect to home
       setTimeout(() => {
-        navigate("/dashboard"); // navigate to dashboard
+        navigate("/home"); // navigate to home
       }, 2000);
     } else {
       showErrorToast("Invalid email or password");

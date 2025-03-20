@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // custom components
 import LoginPage from "./src/pages/Login";
 import SignUpPage from "./src/pages/SignUp";
-import Dashboard from "./src/pages/Dashboard";
-import Header from "./src/components/Header";
+import Home from "./src/pages/Home";
 
 
 const App = ()=>{
@@ -16,7 +15,7 @@ const App = ()=>{
     <Route path="/" element={<LoginPage/>}/>
     <Route path="/login" element={<LoginPage/>}/>
     <Route path="/signup" element={<SignUpPage/>}/>
-    <Route path="/dashboard" element={<Dashboard/>}/>
+    <Route path="/home" element={<Home/>}/>
 </Routes>
     </BrowserRouter>
         </>

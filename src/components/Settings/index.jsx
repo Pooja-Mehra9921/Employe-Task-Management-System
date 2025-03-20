@@ -2,11 +2,11 @@ import React from "react";
 // styles
 import "./style.css"
 
-const Boards = ()=>{
+const Settings = ()=>{
     return(
         <>
-        this is a Boards component</>
+        this is a Settings component</>
     )
 };
 
-export default Boards;
+export default Settings;

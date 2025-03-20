@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Button, Typography, Modal } from "@mui/material";
+import { Box, Button, Typography, Modal, Grid, TextField, Select } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -28,9 +28,19 @@ const AddEmployee = ({ open, setOpen }) => {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Add New Employee
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Employee form will be added here.
-        </Typography>
+        <Grid container>
+          <Grid item>
+            <Typography>First Name</Typography>
+            <TextField></TextField>
+            <Typography>last Name</Typography>
+            <TextField></TextField>
+            <Select>
+      <Option value={1}>Documentation</Option>
+      <Option value={2}>Components</Option>
+      <Option value={3}>Features</Option>
+    </Select>
+          </Grid>
+        </Grid>
         <Button onClick={handleClose} sx={{ mt: 2 }}>
           Close
         </Button>

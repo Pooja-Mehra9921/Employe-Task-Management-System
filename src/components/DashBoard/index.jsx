@@ -2,9 +2,9 @@ import React from "react";
 // styles
 import "./style.css"
 import { Box, Typography } from "@mui/material";
-import HomeCart from "../HomeCart";
+import HomeCart from "../DashboardCart";
 
-const Home = ()=>{
+const DashBoard = ()=>{
     return(
         <>
         <Box className="css-1ygil4i-MuiToolbar-root"></Box>
@@ -21,4 +21,4 @@ const Home = ()=>{
     )
 };
 
-export default Home;
+export default DashBoard;

@@ -2,11 +2,11 @@ import React from "react";
 // styles
 import "./style.css"
 
-const WorkFlows = ()=>{
+const TaskBoard = ()=>{
     return(
         <>
-        this is a WorkFlows component</>
+        this is a TaskBoard component</>
     )
 };
 
-export default WorkFlows;
+export default TaskBoard;

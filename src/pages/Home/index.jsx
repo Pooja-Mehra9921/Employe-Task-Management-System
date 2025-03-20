@@ -23,29 +23,29 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import "./style.css";
 
 // custom components
-import Home from "../../components/Home";
-import Boards from "../../components/Boards";
 import Projects from "../../components/Projects";
-import Analytics from "../../components/Employees";
-import WorkFlows from "../../components/WorkFlows";
 import Notifications from "../../components/Notifications";
-import Newslatter from "../../components/Newslatter";
 import Header from "../../components/Header";
+import DashBoard from "../../components/DashBoard";
+import TaskBoard from "../../components/TaskBoard";
+import EmployeesDetail from "../../components/EmployeesDetail";
+import Reports from "../../components/Reports";
+import Settings from "../../components/Settings";
 
 const drawerWidth = 200; // Set the sidebar width
 
-const Dashboard = () => {
+const Home = () => {
   const listItems = [
-    { title: "Dashboard", icon: <HomeIcon />, component: <Home /> },
-    { title: "Task Board", icon: <DashboardIcon />, component: <Boards /> },
+    { title: "Dashboard", icon: <HomeIcon />, component: <DashBoard /> },
+    { title: "Task Board", icon: <DashboardIcon />, component: <TaskBoard /> },
     { title: "Projects", icon: <WindowIcon />, component: <Projects /> },
-    { title: "Employees", icon: <LeaderboardIcon />, component: <Analytics /> },
-    { title: "Reports", icon: <GroupsIcon />, component: <WorkFlows /> },
+    { title: "Employees", icon: <LeaderboardIcon />, component: <EmployeesDetail /> },
+    { title: "Reports", icon: <GroupsIcon />, component: <Reports /> },
     { title: "Notifications", icon: <NotificationsIcon />, component: <Notifications /> },
-    { title: "Settings", icon: <NewspaperIcon />, component: <Newslatter /> },
+    { title: "Settings", icon: <NewspaperIcon />, component: <Settings /> },
   ];
 
-  const [selectedComponent, setSelectedComponent] = useState(<Home />);
+  const [selectedComponent, setSelectedComponent] = useState(<DashBoard />);
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -112,4 +112,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

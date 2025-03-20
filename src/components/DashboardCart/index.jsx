@@ -4,7 +4,7 @@ import React from "react";
 import "./style.css"
 import { Box, Typography } from "@mui/material";
 
-const HomeCart =({title, bgColor})=>{
+const DashBoardCart =({title, bgColor})=>{
     return(
         <>
         <Box sx={{margin:"10px", backgroundColor: bgColor}} className="main-homecart-container">
@@ -19,4 +19,4 @@ const HomeCart =({title, bgColor})=>{
     )
 };
 
-export default HomeCart;
+export default DashBoardCart;
