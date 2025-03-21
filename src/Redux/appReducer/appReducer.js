@@ -7,7 +7,12 @@ const taskManagementSystem = createSlice({
   },
   reducers: {
     setEmployees: (state, action) => {
-      state.employees = action.payload;
+      if(Array.isArray(action.payload)){
+        state.employees = [...action.payload]
+      }else{
+        state.employees.push(action.payload);
+
+      }
     },
   },
 });

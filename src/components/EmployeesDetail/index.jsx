@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 // styles
 import "./style.css";
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { Box, Button, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployee from "../AddEmployeModal";
+import { useSelector } from "react-redux";
 
 const EmployeesDetail = () => {
   const [openAddEmployee, setOpenAddEmployee] = useState(false);
+  const employees = useSelector((store)=> store.app.employees)
 
   const handleAddEmployee = () => {
     setOpenAddEmployee(true);
@@ -67,6 +69,48 @@ const EmployeesDetail = () => {
           Add New Employee
         </Button>
       </Box>
+      <TableContainer component={Paper} sx={{ mt: 4 }}>
+      <Typography variant="h6" sx={{ p: 2 }}>
+        Employee List
+      </Typography>
+      <Table>
+        <TableHead>
+          <TableRow sx={{ bgcolor: "#f5f5f5" }}>
+            <TableCell><strong>Id</strong></TableCell>
+            <TableCell><strong>First Name</strong></TableCell>
+            <TableCell><strong>Last Name</strong></TableCell>
+            <TableCell><strong>Department</strong></TableCell>
+            <TableCell><strong>Phone Number</strong></TableCell>
+            <TableCell><strong>Address</strong></TableCell>
+            <TableCell sx={{textAlign:"center"}}><strong>Action</strong></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {employees.length > 0 ? (
+            employees.map((employee, index) => (
+              <TableRow key={index}>
+                <TableCell>{index +1}</TableCell>
+                <TableCell>{employee.firstName}</TableCell>
+                <TableCell>{employee.lastName}</TableCell>
+                <TableCell>{employee.department}</TableCell>
+                <TableCell>{employee.phoneNumber}</TableCell>
+                <TableCell>{employee.address}</TableCell>
+                <TableCell sx={{textAlign:"center"}}>
+                  <Button>Edit</Button>
+                <Button>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} align="center">
+                No employees added yet.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </>
   );
 };

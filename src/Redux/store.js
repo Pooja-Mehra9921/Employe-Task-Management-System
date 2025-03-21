@@ -1,16 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import taskManagementSystem from "./appReducer/appReducer"
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // Uses localStorage
+import taskManagementSystem from "./appReducer/appReducer";
 
+// Persist configuration
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-
-
-
+// Create persisted reducer
+const persistedReducer = persistReducer(persistConfig, taskManagementSystem);
 
 export const store = configureStore({
-    reducer:{
-        app: taskManagementSystem,
-    },
+  reducer: {
+    app: persistedReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Required for redux-persist
+    }),
 });
 
-setupListeners(store.dispatch);
+export const persistor = persistStore(store);
