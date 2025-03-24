@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+
+// MUI Components
 import {
   Box,
   Button,
@@ -12,9 +16,10 @@ import {
   styled,
   InputBase,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+
+// Custom
 import { setEmployees } from "../../Redux/appReducer/appReducer";
-import { showErrorToast } from "../Messages";
+import { showErrorToast, showSuccessToast } from "../Messages";
 
 // Style for modal
 const style = {
@@ -39,7 +44,15 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     fontSize: 16,
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
-    fontFamily: ["-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"', "Arial", "sans-serif"].join(","),
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+    ].join(","),
     "&:focus": {
       borderColor: "#80bdff",
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
@@ -48,9 +61,8 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 const AddEmployee = ({ open, setOpen }) => {
-  const dispatch = useDispatch();
-  const addedEmployees = useSelector((store) => store.app.employees);
 
+  const dispatch = useDispatch();
   const [newEmployee, setNewEmployee] = React.useState({
     firstName: "",
     lastName: "",
@@ -63,6 +75,8 @@ const AddEmployee = ({ open, setOpen }) => {
 
   const handleClose = () => setOpen(false);
 
+
+  /** get values from inputs  */
   const handleInputChange = (field) => (e) => {
     setNewEmployee({ ...newEmployee, [field]: e.target.value });
   };
@@ -134,12 +148,24 @@ const AddEmployee = ({ open, setOpen }) => {
 
     setErrors({});
     handleClose();
+      showSuccessToast("Added succussfully")
+    
   };
 
   return (
-    <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom>
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h2"
+          gutterBottom
+        >
           Add New Employee
         </Typography>
         <Grid container spacing={2}>
@@ -171,9 +197,17 @@ const AddEmployee = ({ open, setOpen }) => {
 
           {/* Department Selection */}
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth variant="standard" error={!!errors.department}>
+            <FormControl
+              fullWidth
+              variant="standard"
+              error={!!errors.department}
+            >
               <InputLabel>Select Department</InputLabel>
-              <NativeSelect value={newEmployee.department} onChange={handleInputChange("department")} input={<BootstrapInput />}>
+              <NativeSelect
+                value={newEmployee.department}
+                onChange={handleInputChange("department")}
+                input={<BootstrapInput />}
+              >
                 <option aria-label="None" value="">
                   Select
                 </option>
@@ -182,7 +216,9 @@ const AddEmployee = ({ open, setOpen }) => {
                 <option value="UI/UX Department">UI/UX Department</option>
                 <option value="Graphic Designer">Graphic Designer</option>
               </NativeSelect>
-              {errors.department && <Typography color="error">{errors.department}</Typography>}
+              {errors.department && (
+                <Typography color="error">{errors.department}</Typography>
+              )}
             </FormControl>
           </Grid>
 

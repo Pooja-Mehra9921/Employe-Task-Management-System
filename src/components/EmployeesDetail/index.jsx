@@ -5,15 +5,26 @@ import { Box, Button, InputAdornment, Paper, Table, TableBody, TableCell, TableC
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import AddEmployee from "../AddEmployeModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEmployees } from "../../Redux/appReducer/appReducer";
+import { showSuccessToast } from "../Messages";
 
 const EmployeesDetail = () => {
   const [openAddEmployee, setOpenAddEmployee] = useState(false);
+  const dispatch = useDispatch();
   const employees = useSelector((store)=> store.app.employees)
 
   const handleAddEmployee = () => {
     setOpenAddEmployee(true);
   };
+
+  const handleDeleteBtn = (index)=>()=>{
+  console.log("employe delete", index);
+  const deleteEmployee = employees.filter((_,id)=> id !== index);
+  dispatch(setEmployees(deleteEmployee));
+  showSuccessToast("delete succussfully")
+
+  }
 
   return (
     <>
@@ -97,13 +108,13 @@ const EmployeesDetail = () => {
                 <TableCell>{employee.address}</TableCell>
                 <TableCell sx={{textAlign:"center"}}>
                   <Button>Edit</Button>
-                <Button>Delete</Button>
+                <Button onClick={handleDeleteBtn(index)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={5} align="center">
+              <TableCell colSpan={7} align="center">
                 No employees added yet.
               </TableCell>
             </TableRow>
